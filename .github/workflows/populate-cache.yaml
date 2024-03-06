@@ -14,6 +14,7 @@ jobs:
         branch: [ master ]
         include:
           - { os: ubuntu-latest, system: x86_64-linux }
+          - { os: ubuntu-latest, system: aarch64-linux }
     name: ${{ matrix.os }}, ${{ matrix.system }}
     runs-on: ${{ matrix.os }}
     steps:
