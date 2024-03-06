@@ -1,0 +1,36 @@
+name: "Populate binary cache"
+
+on:
+  schedule:
+    - cron: '00 00 * * *'
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        branch: [ master ]
+        include:
+          - { os: ubuntu-latest, system: x86_64-linux }
+    name: ${{ matrix.os }}, ${{ matrix.system }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: serokell/deploy-rs
+          ref: ${{ matrix.branch }}
+      - uses: docker/setup-qemu-action@v3
+      - uses: cachix/install-nix-action@v25
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+          extra_nix_config: extra-platforms = ${{ matrix.system }}
+      - uses: cachix/cachix-action@v14
+        with:
+          name: deploy-rs
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - name: build deploy-rs
+        run: nix build .#packages.${{ matrix.system }}.default
+      - name: pin output
+        run: cachix pin deploy-rs ${{ matrix.system }}-$(git rev-parse --short HEAD) $(readlink -f ./result) --keep-days 1
