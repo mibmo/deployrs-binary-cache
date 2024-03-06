@@ -10,6 +10,8 @@ on:
 jobs:
   build:
     strategy:
+      # dont fail just because one system doesn't build
+      fail-fast: false
       matrix:
         branch: [ master ]
         include:
