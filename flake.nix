@@ -20,15 +20,12 @@
         packages = with pkgs; [
           act
         ];
-        aliases = rec {
-          run = "act --pull=false --secret GITHUB_TOKEN=$GITHUB_TOKEN --secret CACHIX_AUTH_TOKEN=$CACHIX_AUTH_TOKEN";
-          test = "${run} --dryrun";
-        };
+        aliases.run = "act --pull=false --secret GITHUB_TOKEN=$GITHUB_TOKEN --secret CACHIX_AUTH_TOKEN=$CACHIX_AUTH_TOKEN";
         shellHook = ''
           echo "For testing locally:"
           echo "  - set environment variable GITHUB_TOKEN to a PAT token"
           echo "  - set environment variable CACHIX_AUTH_TOKEN to an auth token"
-          echo "Aliases available are \`run\` for running the action locally and \`test\` for dry-running"
+          echo "A \`run\` alias is defined to run the action workflow locally"
         '';
       });
 }
