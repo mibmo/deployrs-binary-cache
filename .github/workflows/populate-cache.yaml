@@ -33,9 +33,9 @@ jobs:
         with:
           name: deploy-rs
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - name: build deploy-rs
+      - name: Build deploy-rs
         run: nix build .#packages.${{ matrix.system }}.default
-      - name: push output
+      - name: Push store path to cachix
         run: cachix push deploy-rs $(readlink -f ./result)
-      - name: pin output
+      - name: Pin store path on cachix
         run: cachix pin deploy-rs ${{ matrix.system }}-$(git rev-parse --short HEAD) $(readlink -f ./result) --keep-days 1
