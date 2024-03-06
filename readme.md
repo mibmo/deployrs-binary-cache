@@ -10,9 +10,9 @@ We try to support all the systems that deploy-rs does.
 - [x] `x86_64-linux`
 - [x] `aarch64-linux`
 - [x] `x86_64-darwin`
-- [ ] `aarch64-darwin`
+- [x] `aarch64-darwin`
 
-**Note:** as of writing, I'm unable to get it building on Apple Silicon (`aarch64-darwin`). Otherwise there's full support! :)
+**Note:** the `aarch64-darwin` build is run on flyci's m1 macs, because they offer a free tier for open-source projects.
 
 ## Usage
 
