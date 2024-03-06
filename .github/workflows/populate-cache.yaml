@@ -17,7 +17,7 @@ jobs:
           - { os: ubuntu-latest, system: aarch64-linux }
           - { os: macos-latest,  system: x86_64-darwin }
           - { os: macos-latest,  system: aarch64-darwin }
-    name: ${{ matrix.os }}, ${{ matrix.system }}
+    name: ${{ matrix.branch }} for ${{ matrix.system }}
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
