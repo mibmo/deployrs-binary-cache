@@ -1,1 +1,48 @@
-# Binary cache for [deploy-rs](https://github.com/serokell/deploy-rs)
+[deploy-rs]: https://github.com/serokell/deploy-rs
+
+# Binary cache for [deploy-rs][deploy-rs]
+An up-to-date binary cache of [serokell/deploy-rs][deploy-rs].
+Builds are generated nightly to ensure the latest version is always cached.
+
+## System support
+We try to support all the systems that deploy-rs does.
+
+- [x] `x86_64-linux`
+- [x] `aarch64-linux`
+- [x] `x86_64-darwin`
+- [ ] `aarch64-darwin`
+
+**Note:** as of writing, I'm unable to get it building on Apple Silicon (`aarch64-darwin`). Otherwise there's full support! :)
+
+## Usage
+
+### Flake-based system
+To use the binary cache for nixos systems configured via flake, first
+add the cache as a substituter and then trust the public key.
+```nix
+nix.settings = {
+  substituters = [ "https://deploy-rs.cachix.org" ];
+  trusted-public-keys = [ "deploy-rs.cachix.org-1:xfNobmiwF/vzvK1gpfediPwpdIP0rpDV2rYqx40zdSI=" ];
+};
+```
+
+### Non-flake system
+To use the binary cache, add it to your [`nix.conf`](https://nixos.org/manual/nix/stable/command-ref/conf-file.html).
+```conf
+extra-substituters = https://deploy-rs.cachix.org
+extra-trusted-public-keys = deploy-rs.cachix.org-1:xfNobmiwF/vzvK1gpfediPwpdIP0rpDV2rYqx40zdSI=
+```
+
+### Per-flake configuration
+Flakes can suggest `nix.conf` changes when evaluated via the top-level `nixosConfig` attribute.
+To add the cache for users of your flake, add the following to your flake
+```nix
+{
+  input = { ... };
+  outputs = { ... };
+  nixConfig = {
+    extra-substituters = [ "https://deploy-rs.cachix.org" ];
+    extra-trusted-public-keys = [ "deploy-rs.cachix.org-1:xfNobmiwF/vzvK1gpfediPwpdIP0rpDV2rYqx40zdSI=" ];
+  };
+}
+```
