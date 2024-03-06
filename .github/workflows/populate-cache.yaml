@@ -36,6 +36,8 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
       - name: Build deploy-rs
         run: nix build .#packages.${{ matrix.system }}.default
+      # pushing is automatically done by cachix-action's post-run, but to pin a path it needs to
+      # exist first the post-run push will report "path already exists" and can be safely ignored
       - name: Push store path to cachix
         run: cachix push deploy-rs $(readlink -f ./result)
       - name: Pin store path on cachix
