@@ -1,6 +1,9 @@
 [deploy-rs]: https://github.com/serokell/deploy-rs
+[github-workflow]: https://github.com/mibmo/deployrs-binary-cache/actions/workflows/populate-cache.yaml
 
 # Binary cache for [deploy-rs][deploy-rs]
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mibmo/deployrs-binary-cache/populate-cache.yaml?style=flat-square)][github-workflow]
+
 An up-to-date binary cache of [serokell/deploy-rs][deploy-rs].
 Builds are generated nightly to ensure the latest version is always cached.
 
