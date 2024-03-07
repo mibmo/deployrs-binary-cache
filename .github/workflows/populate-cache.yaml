@@ -44,4 +44,4 @@ jobs:
       - name: Push store path to cachix
         run: cachix push deploy-rs $(readlink -f ./result)
       - name: Pin store path on cachix
-        run: cachix pin deploy-rs ${{ matrix.config.system }}-$(git rev-parse --short HEAD) $(readlink -f ./result) --keep-days 1
+        run: cachix pin deploy-rs ${{ matrix.config.system }}-$(git rev-parse --short HEAD) $(readlink -f ./result) --keep-days 7
