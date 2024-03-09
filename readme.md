@@ -1,6 +1,15 @@
 [deploy-rs]: https://github.com/serokell/deploy-rs
 [github-workflow]: https://github.com/mibmo/deployrs-binary-cache/actions/workflows/populate-cache.yaml
 
+# !! NO LONGER MAINTAINED !! MOVED TO [cache-it](https://github.com/mibmo/cache-it)
+The cache (deploy-rs.cachix.org) is still actively populated and with the same keys, but the code for doing so is no longer located here.
+
+---
+---
+---
+---
+---
+
 # Binary cache for [deploy-rs][deploy-rs]
 [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mibmo/deployrs-binary-cache/populate-cache.yaml?style=flat-square)][github-workflow]
 
